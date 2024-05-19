@@ -1,233 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Market Prediction Calculator</title>
+    <title>
+      Market Prediction Calculator
+    </title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-        crossorigin="anonymous">
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous">
     <!-- Latest jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous">
     </script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-        crossorigin="anonymous">
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous">
     </script>
     <!-- Your Custom Styles (if any) -->
     <style>
-        body {
-            background-color: #212529;
-            /* Dark background color */
-            color: #ffffff;
-            /* Light text color */
-            padding: 20px;
-            overflow: hidden;
-            /* Hide overflow to prevent scrollbars */
-        }
-
-        .container {
-            position: relative;
-            background-color: #343a40;
-            /* Dark container background color */
-            padding: 20px;
-            border-radius: 10px;
-            overflow: hidden;
-            /* Hide overflow for the container */
-        }
-
-        h1 {
-            color: #17a2b8;
-            /* Aqua color for heading */
-        }
-
-        label {
-            color: #17a2b8;
-            /* Aqua color for labels */
-        }
-
-        input {
-            background-color: #495057;
-            /* Dark input background color */
-            color: #ffffff;
-            /* Light text color */
-        }
-
-        button {
-            background-color: #007bff;
-            /* Primary button color */
-        }
-
-        #result {
-            margin-top: 20px;
-            color: #28a745;
-            /* Green color for result text */
-        }
-
-        /* Bubbles Animation */
-        @keyframes bubbles {
-            0% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-
-            100% {
-                transform: translateY(0);
-            }
-        }
-
-        .bubble {
-            position: absolute;
-            background-color: rgba(255, 255, 255, 0.2);
-            /* Semi-transparent white */
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            animation: bubbles 2s infinite;
-            /* Apply the bubbles animation */
-        }
-
-        /* Additional Bubbles */
-        .bubble.bubble2 {
-            animation-delay: 0.5s;
-        }
-
-        .bubble.bubble3 {
-            animation-delay: 1s;
-        }
+      body { background-color: #212529; /* Dark background color */ color: #ffffff;
+      /* Light text color */ padding: 20px; overflow: hidden; /* Hide overflow
+      to prevent scrollbars */ } .container { position: relative; background-color:
+      #343a40; /* Dark container background color */ padding: 20px; border-radius:
+      10px; overflow: hidden; /* Hide overflow for the container */ } h1 { color:
+      #17a2b8; /* Aqua color for heading */ } label { color: #17a2b8; /* Aqua
+      color for labels */ } input { background-color: #495057; /* Dark input
+      background color */ color: #ffffff; /* Light text color */ } button { background-color:
+      #007bff; /* Primary button color */ } #result { margin-top: 20px; color:
+      #28a745; /* Green color for result text */ } /* Bubbles Animation */ @keyframes
+      bubbles { 0% { transform: translateY(0); } 50% { transform: translateY(-10px);
+      } 100% { transform: translateY(0); } } .bubble { position: absolute; background-color:
+      rgba(255, 255, 255, 0.2); /* Semi-transparent white */ width: 20px; height:
+      20px; border-radius: 50%; animation: bubbles 2s infinite; /* Apply the
+      bubbles animation */ } /* Additional Bubbles */ .bubble.bubble2 { animation-delay:
+      0.5s; } .bubble.bubble3 { animation-delay: 1s; }
     </style>
-</head>
-
-<body>
+  </head>
+  
+  <body>
     <div class="container mt-5">
-        <h1 class="mb-4">
-            Market Prediction
-        </h1>
-        <hr>
-        <h3>
-            Use on market open time only
-        </h3>
-        <div class="form-group">
-            <label for="indiaVix">
-                Enter India VIX
-            </label>
-            <input id="indiaVix" required placeholder="i.e. 14.7" name="indiaVix" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="currentMarketPrice">
-                Current Market Price (Nifty50)
-            </label>
-            <div id="currentMarketPrice"></div>
-        </div>
-        <div class="form-group">
-            <button id="calculateBtn" class="btn btn-primary mt-3">
-                Calculate Prediction
-            </button>
-        </div>
-        <div id="result" class="mt-4">
-            <!-- Result will be displayed here -->
-        </div>
-        <hr>
-        <b class="text-center">
-            Buy ETF (Only After 3PM Daily 1ETF Only)
-        </b>
-        <table id="result-table" class="table table-responsive">
-            <thead>
-                <tr>
-                    <th>
-                        Rank
-                    </th>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Percentage
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-        <!-- Bubbles Animation -->
-        <div class="bubble" style="top: 100px; left: 50px;">
-        </div>
-        <div class="bubble bubble2" style="top: 200px; left: 150px;">
-        </div>
-        <div class="bubble bubble3" style="top: 300px; left: 250px;">
-        </div>
+      <h1 class="mb-4">
+        Market Prediction
+      </h1>
+      <hr>
+      <h3>
+        Use on market open time only
+      </h3>
+      <div class="form-group">
+        <label for="indiaVix">
+          Enter India VIX
+        </label>
+        <input id="indiaVix" required placeholder="i.e. 14.7" name="indiaVix"
+        type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="currentMarketPrice">
+          Enter Current Market Price
+        </label>
+        <input id="currentMarketPrice" required placeholder="i.e. 21400" name="currentMarketPrice"
+        type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <button id="calculateBtn" class="btn btn-primary mt-3">
+          Calculate Prediction
+        </button>
+      </div>
+      <div id="result" class="mt-4">
+        <!-- Result will be displayed here -->
+      </div>
+      <hr>
+      <b class="text-center">
+        Buy ETF (Only After 3PM Daily 1ETF Only) 
+      </b>
+      <table id="result-table" class="table table-responsive">
+        <thead>
+          <tr>
+            <th>
+              Rank
+            </th>
+            <th>
+              Name
+            </th>
+            <th>
+              Percentage
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <!-- Bubbles Animation -->
+      <div class="bubble" style="top: 100px; left: 50px;">
+      </div>
+      <div class="bubble bubble2" style="top: 200px; left: 150px;">
+      </div>
+      <div class="bubble bubble3" style="top: 300px; left: 250px;">
+      </div>
     </div>
     <script>
-        $(document).ready(function () {
-            $("#calculateBtn").click(function () {
-                // Get values from input fields
-                var indiaVix = parseFloat($("#indiaVix").val());
-                var currentMarketPrice = parseFloat($("#currentMarketPriceValue").text());
+      $(document).ready(function() {
+        $("#calculateBtn").click(function() {
+          // Get values from input fields
+          var indiaVix = parseFloat($("#indiaVix").val());
+          var currentMarketPrice = parseFloat($("#currentMarketPrice").val());
 
-                // Calculate prediction
-                var a = indiaVix / 7.2; //weekly 
-                var maxLow = currentMarketPrice - (currentMarketPrice * (a / 100));
-                var maxHigh = currentMarketPrice + (currentMarketPrice * (a / 100));
+          // Calculate prediction
+          var a = indiaVix / 7.2; //weekly 
+          var maxLow = currentMarketPrice - (currentMarketPrice * (a / 100));
+          var maxHigh = currentMarketPrice + (currentMarketPrice * (a / 100));
 
-                // Display the result
-                $("#result").html("<h4>Market Prediction: Max Low - " + maxLow.toFixed(2) + ", Max High - " + maxHigh.toFixed(2) + "</h4>");
-            });
-
-            // Fetch current market price
-            $.ajax({
-                url: 'https://www.alphavantage.co/query',
-                method: 'GET',
-                dataType: 'json',
-                data: {
-                    function: 'GLOBAL_QUOTE',
-                    symbol: '^NSEI',
-                    apikey: '4WJRGLHWF9P0FDLN'
-                },
-                success: function (response) {
-                    var currentPrice = response["Global Quote"]["05. price"];
-                    $("#currentMarketPrice").html("<p>Current Market Price (Nifty50): <span id='currentMarketPriceValue'>" + currentPrice + "</span></p>");
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error fetching current market price:', error);
-                    $("#currentMarketPrice").html("<p>Error fetching current market price</p>");
-                }
-            });
-
-            $.ajax({
-                method: 'get',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                dataType: 'json',
-                crossDomain: true,
-                url: 'https://script.google.com/macros/s/AKfycbwjNF6hVt9N6RIQ8jyNX8m4hyjGhCuY7S_14-60MW9V8ngOTaM6q9KlUltHrjJsGkuU/exec',
-                success: function (response) {
-                    if (response.hasOwnProperty('data') && Array.isArray(response.data)) {
-                        for (var i = 0; i < response.data.length; i++) {
-                            var entry = response.data[i];
-                            $('#result-table tbody').append(
-                                '<tr>' +
-                                '<td class="text-success">' + entry.rank + '</td>' +
-                                '<td class="text-primary">' + entry.etfcode + '</td>' +
-                                '<td class="text-danger">' + entry.percentage + '</td>' +
-                                '</tr>'
-                            );
-                        }
-                    }
-                },
-                error: function (error) {
-                    console.error('Ajax request error:', error);
-                }
-            });
+          // Display the result
+          $("#result").html("<h4>Market Prediction: Max Low - " + maxLow.toFixed(2) + ", Max High - " + maxHigh.toFixed(2) + "</h4>");
         });
+
+        $.ajax({
+          method: 'get',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          dataType: 'json',
+          crossDomain: true,
+          url: 'https://script.google.com/macros/s/AKfycbwjNF6hVt9N6RIQ8jyNX8m4hyjGhCuY7S_14-60MW9V8ngOTaM6q9KlUltHrjJsGkuU/exec',
+          success: function(response) {
+		if (response.hasOwnProperty('data') && Array.isArray(response.data)) {
+        for (var i = 0; i < response.data.length; i++) {
+          var entry = response.data[i];
+          $('#result-table tbody').append(
+            '<tr>' +
+              '<td class="text-success">' + entry.rank + '</td>' +
+ 		'<td class="text-primary">' + entry.etfcode + '</td>' +
+              '<td class="text-danger">' + entry.percentage + '</td>' +
+            '</tr>'
+          );
+	}
+	}
+	  },
+          error: function(error) {
+            console.error('Ajax request error:', error);
+          }
+        });
+      });
     </script>
-</body>
+  </body>
 
 </html>
